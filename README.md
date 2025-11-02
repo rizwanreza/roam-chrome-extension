@@ -6,11 +6,12 @@ A Chrome extension that saves the current URL to your Roam Research daily notes.
 
 ## Features
 
-- 🔗 Save current page URL to Roam Research
+- 🔗 Save current page URL directly to Roam Research
 - 📅 Automatically adds to today's daily note
 - ⚙️ Multiple formatting options (link only, title + link, bullet point)
-- 🔐 Secure local storage of credentials
-- 📋 Copy-to-clipboard functionality (current implementation)
+- 🔐 Secure local storage of API credentials
+- 🏷️ Automatically adds [[To Read]] tag to saved items
+- ⚡ Direct API integration - no manual copying required
 
 ## Installation
 
@@ -20,56 +21,60 @@ A Chrome extension that saves the current URL to your Roam Research daily notes.
 4. Click "Load unpacked" and select the extension folder
 5. The extension icon should appear in your toolbar
 
-## Usage
+## Setup
+
+### Getting Your Roam Research API Token
+
+1. Go to your Roam Research graph settings
+2. Navigate to the API section
+3. Generate a new API token
+4. Copy and save this token securely
+
+### Using the Extension
 
 1. Navigate to any webpage you want to save
 2. Click the extension icon in your toolbar
 3. Enter your Roam Research credentials:
    - Graph name (e.g., "my-roam-graph")
-   - Email and password
-4. Choose your preferred format
+   - API token (click "Authentication Settings" to expand)
+4. Choose your preferred format (link only, title + link, or bullet point)
 5. Click "Save to Today's Page"
-6. The formatted content will be copied to your clipboard
-7. Paste it into your Roam Research daily note
+6. The URL will be saved directly to your Roam Research daily note with a [[To Read]] tag
 
-## Current Implementation
+## How It Works
 
-This version copies formatted content to your clipboard for manual pasting into Roam Research. The content is formatted as:
+The extension uses the Roam Research API to directly write blocks to your daily notes. When you save a page, it:
 
-```
-[[December 29th, 2024]]
-  - [Page Title](https://example.com)
-```
+1. Formats the URL according to your preference (e.g., `[Page Title](https://example.com)`)
+2. Adds a `[[To Read]]` tag automatically
+3. Creates a new block in today's daily note page
+4. Saves your settings for future use
 
 ## Future Enhancements
 
-- Direct API integration with Roam Research
+- Custom tag configuration (currently hardcoded to [[To Read]])
 - Background sync capabilities
 - Bulk URL saving
-- Custom date selection
-- Tag and block reference support
+- Custom date selection (save to past/future dates)
+- Additional block reference and metadata support
+- Keyboard shortcuts for quick saving
 
 ## Security Notes
 
-- Credentials are stored locally in Chrome's storage
-- No data is sent to external servers (except Roam Research when API is integrated)
-- Passwords are handled securely within the extension
+- API tokens are stored locally in Chrome's storage
+- Data is only sent to the official Roam Research API (api.roamresearch.com)
+- No third-party services or analytics are used
+- Keep your API token secure and don't share it
 
-## Development
+## Project Structure
 
-The extension consists of:
-- `manifest.json` - Extension configuration
-- `popup.html/js` - User interface
-- `background.js` - Background service worker
-- `content.js` - Page content interaction
-
-## Icons
-
-You'll need to add icon files in the `icons/` directory:
-- `icon16.png` (16x16)
-- `icon32.png` (32x32)
-- `icon48.png` (48x48)
-- `icon128.png` (128x128)
+```
+roam-research-chrome-extension/
+├── manifest.json       # Extension configuration
+├── popup.html         # Extension popup UI
+├── popup.js          # Main popup logic and API integration
+└── icons/            # Extension icons (16x16, 32x32, 48x48, 128x128)
+```
 
 ## License
 
