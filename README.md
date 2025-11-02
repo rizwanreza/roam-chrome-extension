@@ -2,6 +2,8 @@
 
 A Chrome extension that saves the current URL to your Roam Research daily notes.
 
+[![Certified Shovelware](https://justin.searls.co/img/shovelware.svg)](https://justin.searls.co/shovelware/)
+
 ## Features
 
 - 🔗 Save current page URL to Roam Research
